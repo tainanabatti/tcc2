@@ -11,7 +11,7 @@ $conn_string = "host=".$host." port=".$porta." dbname=".$db." user=".$user." pas
 
 //var_dump($conn_string);
 
-$conexao = pg_connect($conn_string); //or die ("Erro".var_dump($conexao) );
+$conexao = pg_connect($conn_string);
 
 if ($conexao == false){
     echo "deu ruim";
