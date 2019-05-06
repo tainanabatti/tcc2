@@ -16,6 +16,8 @@ $conexao = pg_connect($conn_string);
 if ($conexao == false){
     echo "deu ruim";
 }else{
+
+   // header('Location: tabela.html');
 $sql = "SELECT tablename FROM PG_TABLES WHERE schemaname = 'public'";
 
 $resultado = pg_query($conexao, $sql);
@@ -24,7 +26,9 @@ $resultado = pg_query($conexao, $sql);
 
    foreach ($table as $key){
        foreach ($key as $k){
-           echo $k;
+           echo $k.'<br>' ;
+
+
        }
    }
 }
