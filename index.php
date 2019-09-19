@@ -15,12 +15,12 @@
 
 <div class="login">
     <h1>Conexão</h1>
-    <form action="./php/login.php" method="post">
+    <form action="php/tabela.php" method="post">
         <input type="text" name="host" placeholder="Host" required="required" />
         <input type="text" name="user" placeholder="Usuário" required="required" />
         <input type="text" name="porta" placeholder="Porta"/>
         <input type="password" name="senha" placeholder="Senha" required="required" />
-        <input type="text" name="db" placeholder="Banco de Dados"/>
+        <input type="text" name="banco" placeholder="Banco de Dados"/>
         <button type="submit" class="btn btn-primary btn-block btn-large">Conectar</button>
     </form>
 </div>
