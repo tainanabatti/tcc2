@@ -5,9 +5,8 @@
         <meta charset="UTF-8">
         <title>Login Form</title>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"  rel="stylesheet">
         <link rel="stylesheet" href="../css/style.css">
-<!--        <link rel="stylesheet" href="../css/bootstrap.css">-->
 
     </head>
     <body>
@@ -16,45 +15,70 @@
 
        $CONEXAO = pg_connect($_POST['conn']);
 
-        $sql = "SELECT column_name, data_type FROM information_schema.columns WHERE (data_type = 'integer' or data_type = 'date') and  table_name = '".$_REQUEST['table']."'";
+        $sql = "SELECT column_name, data_type FROM information_schema.columns WHERE (data_type = 'integer' or data_type = 'date' or data_type like '%time%') and  table_name = '".$_REQUEST['nome']."'";
 
 
         $resultado = pg_query($CONEXAO, $sql);
 
         $column =pg_fetch_all($resultado);
 
-        echo '<table style="width:100%">';
-        echo '<tr>';
-        echo '<th>Firstname</th>';
-        echo '<th>Lastname</th>';
-        echo '<th>Age</th>';
-        echo '</tr>';
+        echo '<form action="processa.php" method="post">';
 
-    //    print_r($column);
+        echo '<input type="checkbox" hidden name="conn" value="'.$_POST["conn"].'" checked></link><br>' ;
 
-        foreach ($column as $key){
-     //      foreach ($key as $k){
-
-
-//                print_r($key);
-//                // print_r()  $column;
-                $i = 0;
+        echo '<div id="DivEsq" >';
+        echo '<table class="table table-striped">';
+            echo '<thead>';
                 echo '<tr>';
-                echo '<th><input type="radio"/></th>';
-                echo '<th>'.$key['column_name'].'</th>';
-                echo '<th>'.$key['data_type'].'</th>';
+                    echo '<th>  </th>';
+                    echo '<th>Nome Coluna</th>';
+                    echo '<th>Tipo Dado</th>';
                 echo '</tr>';
-                $i++;
+            echo '</thead>';
+            echo '<tbody>';
 
-//                echo '<div class="login"><form action="./php/filtro.php" method="get">';
-//                echo '<a href="filtro.php?table='.$k.'"  name="'.$k.'"  value="'.$k.'">'.$k.'</link><br>' ;
-//                echo '</form></div>';
-    //      }
-        }
-       ?>
-        </table>
+            foreach ($column as $key){
+                    $i = 0;
+                    echo '<tr>';
+                        echo '<td><input  type="radio" name="nome" value="'.$key['column_name'].'"/></td>';
+                        echo '<td  nome="nome">'.$key['column_name'].'</td>';
+                        echo '<td>'.$key['data_type'].'</td>';
+                    echo '</tr>';
+                    $i++;
+            }
+           ?>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div id="DivDir">
+<ul>
+            <li> <input type="radio" name="gender" value="male"> Male </li>
+            <li>   <input type="radio" name="gender" value="female"> Female </li>
+            <li>   <input type="radio" name="gender" value="other"> Other  </li>
+</ul>
+            <button type="submit" class="btn btn-medium btn-primary btn-block-medium">Conectar</button>
+        </div>
+
+        </form>
     </body>
 
 </html>
+
+
+
 
 

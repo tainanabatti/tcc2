@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <title>Tabelas</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"  rel="stylesheet">
+<!--   <link rel="stylesheet" href="../css/singin.css">-->
+<!--    //<link rel="stylesheet" href="../css/bootstrap.css">-->
 
 </head>
 <body>
@@ -31,23 +32,34 @@ if ($CONEXAO == false){
   //  echo "deu ruim";
 }else{
 
-    $sql = "SELECT tablename FROM PG_TABLES WHERE schemaname = 'public'";
+    $sql = "SELECT tablename FROM PG_TABLES WHERE schemaname = 'public' order by tablename";
 
     $resultado = pg_query($CONEXAO, $sql);
 
     $table =pg_fetch_all($resultado);
 
-    echo '<input type="checkbox" hidden name="conn"  value="'.$conn_string.'" checked></link><br>' ;
+
+	echo '<table class="table table-borderless">';
+	echo '<thead>';
+	echo '<tr>';
+	echo '<th> chech   </th>';
+	echo '</tr>';
+	echo '</thead>';
+	echo '<tbody>';
 
     foreach ($table as $key){
         foreach ($key as $k){
-
-            echo '<button type="submit"  name="table" value="'.$k.'" class="btn btn-primary btn-block " >'.$k.'</button><br>';
+	        echo '<tr>
+                    <td><input type="submit" class="form-control"  name="nome" value="'.$k.'" /></td>
+	             </tr>';
         }
     }
 
+	echo '<input type="checkbox" hidden name="conn"  value="'.$conn_string.'" checked></br>' ;
 }
 ?>
+        </tbody>
+    </table>
 
 </form>
 </body>
